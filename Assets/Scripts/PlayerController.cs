@@ -10,10 +10,13 @@ public class PlayerController : MonoBehaviour
     private int pickupCount;
     private Timer timer;
     private bool gameOver = false;
+    GameObject resetPoint;
+    bool resetting = false;
+    Color originalColour;
 
     [Header("UI")]
     public GameObject inGamePanel;
-    public GameObject winPanel;
+    public GameObject GameOverScreen;
     public TMP_Text scoreText;
     public TMP_Text timerText;
     public TMP_Text winTimeText;
@@ -25,14 +28,16 @@ public class PlayerController : MonoBehaviour
         //Get the number of pickups in our scene
         pickupCount = GameObject.FindGameObjectsWithTag("Pick Up").Length;
         //Run the check pickups function
-        CheckPickups();
+        SetCountText();
         //Get the timer object and start the timer
         timer = FindObjectOfType<Timer>();
         timer.StartTimer();
         // Turn on our in game panel
         inGamePanel.SetActive(true);
         //Turn off our win panel
-        winPanel.SetActive(false);
+        GameOverScreen.SetActive(false);
+        resetPoint = GameObject.Find("Reset point");
+        originalColour = GetComponent<Renderer>().material.color;
     }
 
     private void Update()
@@ -46,11 +51,22 @@ public class PlayerController : MonoBehaviour
         if (gameOver == true)
             return;
 
+        if (resetting)
+            return;
+
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
         Vector3 movement = new Vector3(moveHorizontal, 0, moveVertical);
         rb.AddForce(movement * speed);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+       if(collision.gameObject.CompareTag("Respawn"))
+        {
+            StartCoroutine(ResetPlayer());
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -61,10 +77,10 @@ public class PlayerController : MonoBehaviour
             //Decrement the pickup count
             pickupCount -= 1;
             //Run the check pickups function
-            CheckPickups();
+            SetCountText();
         }
     }
-    void CheckPickups()
+    void SetCountText()
     {
         //Print the number of pickups in our scene
         scoreText.text = "Pickups Left: " + pickupCount;
@@ -81,7 +97,7 @@ public class PlayerController : MonoBehaviour
         // Stop the timer
         timer.StopTimer();
         //Turn on our win panel
-        winPanel.SetActive(true);
+        GameOverScreen.SetActive(true);
         //Turn off our in game panel
         inGamePanel.SetActive(false);
         //Display the timer on the win time text
