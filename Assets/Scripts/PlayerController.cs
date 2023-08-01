@@ -15,9 +15,9 @@ public class PlayerController : MonoBehaviour
     bool resetting = false;
     Color originalColour;
 
-    [Header("UI")]
+    [Header("UI Stuff")]
     public GameObject inGamePanel;
-    public GameObject GameOverScreen;
+    public GameObject gameOverScreen;
     public TMP_Text scoreText;
     public TMP_Text timerText;
     public TMP_Text winTimeText;
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
         // Turn on our in game panel
         inGamePanel.SetActive(true);
         //Turn off our win panel
-        GameOverScreen.SetActive(false);
+        gameOverScreen.SetActive(false);
         resetPoint = GameObject.Find("Reset point");
         originalColour = GetComponent<Renderer>().material.color;
     }
@@ -117,7 +117,7 @@ public class PlayerController : MonoBehaviour
         // Stop the timer
         timer.StopTimer();
         //Turn on our win panel
-        GameOverScreen.SetActive(true);
+        gameOverScreen.SetActive(true);
         //Turn off our in game panel
         inGamePanel.SetActive(false);
         //Display the timer on the win time text

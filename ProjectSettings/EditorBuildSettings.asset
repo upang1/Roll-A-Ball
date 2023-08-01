@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Title.unity
+    guid: 3a32de46a6d2a3042ac28ce6e0d783cd
+  - enabled: 1
+    path: Assets/Scenes/Pangilinan_U_AGA206_A2.unity
+    guid: 38f5dc7ad325c3c48b7beeb7534273c6
   m_configObjects: {}

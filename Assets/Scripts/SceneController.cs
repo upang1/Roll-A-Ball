@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
-    // Will change our scene to tge string passed in
-    public void ChangeScene(string_scenename)
+    // Will change our scene to the string passed in
+    public void ChangeScene(string _sceneName)
     {
         SceneManager.LoadScene(_sceneName);
     }
@@ -20,7 +18,7 @@ public class SceneController : MonoBehaviour
     //Loads out Tutle scene, must be called title exactly
     public void ToTileScene()
     { 
-        SceneManager.LoadScene(SceneManager"Title");
+        SceneManager.LoadScene("Title");
     }
 
     //Gets our active scene name
