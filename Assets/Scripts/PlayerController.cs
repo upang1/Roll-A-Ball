@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
         inGamePanel.SetActive(true);
         //Turn off our win panel
         gameOverScreen.SetActive(false);
-        resetPoint = GameObject.Find("Reset point");
+        resetPoint = GameObject.Find("Reset Point");
         originalColour = GetComponent<Renderer>().material.color;
     }
 
@@ -46,14 +46,13 @@ public class PlayerController : MonoBehaviour
         timerText.text = "Time: " + timer.GetTime().ToString("F2");
     }
 
+   
     // Update is called once per frame
     void FixedUpdate()
     {
      if (resetting)
             return;
 
-        if (gameOver == true)
-            return;
 
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
