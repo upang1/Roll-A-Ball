@@ -28,7 +28,8 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         rb = GetComponent<Rigidbody>();
         //Get the number of pickups in our scene
-        pickupCount = GameObject.FindGameObjectsWithTag("Pick Up").Length;
+        pickupCount = GameObject.FindGameObjectsWithTag("Pick Up").Length + GameObject.FindGameObjectsWithTag("Bowling Pin").Length;
+
         //Run the check pickups function
         SetCountText();
         //Get the timer object and start the timer
@@ -93,6 +94,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Pick Up")
         {
+            other.GetComponent<Particles>().CreateParticles();
             Destroy(other.gameObject);
             //Decrement the pickup count
             pickupCount -= 1;
@@ -128,6 +130,7 @@ public class PlayerController : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
     }
 
+
     public void RestartGame()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
@@ -136,5 +139,11 @@ public class PlayerController : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void PinFall()
+    {
+        pickupCount += 1;
+        SetCountText();
     }
 }
