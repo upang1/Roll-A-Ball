@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     bool resetting = false;
     Color originalColour;
 
+    GameController gameController;
+
     [Header("UI Stuff")]
     public GameObject inGamePanel;
     public GameObject gameOverScreen;
@@ -41,18 +43,18 @@ public class PlayerController : MonoBehaviour
         gameOverScreen.SetActive(false);
         resetPoint = GameObject.Find("Reset Point");
         originalColour = GetComponent<Renderer>().material.color;
+
+        gameController = FindObjectOfType<GameController>();
+        timer = FindObjectOfType<Timer>();
+        if (gameController.gameType == GameType.SpeedRun)
+            StartCoroutine(timer.StartCountdown());
     }
 
-    private void Update()
-    {
-        timerText.text = "Time: " + timer.GetTime().ToString("F2");
-    }
 
-   
     // Update is called once per frame
     void FixedUpdate()
     {
-     if (resetting)
+        if (gameController.gameType == GameType.SpeedRun && !timer.IsTiming())
             return;
 
 
@@ -102,6 +104,13 @@ public class PlayerController : MonoBehaviour
             SetCountText();
         }
     }
+
+    private void Update()
+    {
+        timerText.text = "Time:" + timer.GetTime().ToString("F2");
+    }
+
+
     void SetCountText()
     {
         //Print the number of pickups in our scene
@@ -123,7 +132,12 @@ public class PlayerController : MonoBehaviour
         //Turn off our in game panel
         inGamePanel.SetActive(false);
         //Display the timer on the win time text
+
         winTimeText.text = "Your time was: " + timer.GetTime().ToString("F2");
+        
+
+        if (gameController.gameType == GameType.SpeedRun)
+            timer.StopTimer();
 
         //Set the velocity of the rigid body to zero
         rb.velocity = Vector3.zero;
