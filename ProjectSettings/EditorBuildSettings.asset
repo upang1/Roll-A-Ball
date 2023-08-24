@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Pangilinan_U_AGA206_A2.unity
     guid: 38f5dc7ad325c3c48b7beeb7534273c6
   - enabled: 1
-    path: Assets/Scenes/HorseyMode.unity
+    path: Assets/Scenes/DISCARDEDHorseyMode.unity
     guid: c61c770fe1333644fb334adba901ead2
+  - enabled: 1
+    path: Assets/Scenes/TiltWorld.unity
+    guid: bf6c8678d0216d44c881b051ef47a0ea
   m_configObjects: {}
