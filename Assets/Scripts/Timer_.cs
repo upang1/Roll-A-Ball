@@ -1,9 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-public class Timer : MonoBehaviour
+public class Timer_ : MonoBehaviour
 {
     float currentTime = 0;
     float bestTime;
@@ -13,15 +12,15 @@ public class Timer : MonoBehaviour
 
     [Header("UI Countdown Panel")]
     public GameObject countdownPanel;
-    public TMP_Text countdownText;
+    public Text countdownText;
 
     [Header("UI In Game Panel")]
-    public TMP_Text timerText;
+    public Text timerText;
 
     [Header("UI Game Over Panel")]
     public GameObject timesPanel;
-    public TMP_Text myTimeResult;
-    public TMP_Text bestTimeResult;
+    public Text myTimeResult;
+    public Text bestTimeResult;
 
     void Start()
     {
@@ -33,12 +32,18 @@ public class Timer : MonoBehaviour
 
     void Update()
     {
-        if(timing)
+        if (timing)
         {
             currentTime += Time.deltaTime;
             timerText.text = currentTime.ToString("F3");
         }
     }
+
+    public float GetTime()
+    {
+        return currentTime;
+    }
+
 
     public IEnumerator StartCountdown()
     {
@@ -67,12 +72,6 @@ public class Timer : MonoBehaviour
         currentTime = 0;
         timing = true;
     }
-
-    public float GetTime()
-    {
-        return currentTime;
-    }
-
 
     public void StopTimer()
     {

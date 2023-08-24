@@ -17,7 +17,8 @@ public class SceneController : MonoBehaviour
 
     //Loads out Tutle scene, must be called title exactly
     public void ToTileScene()
-    { 
+    {
+        GameController.instance.controlType = ControlType.Normal;
         SceneManager.LoadScene("Title");
     }
 

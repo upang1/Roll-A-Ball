@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour
         originalColour = GetComponent<Renderer>().material.color;
 
         gameController = FindObjectOfType<GameController>();
-        timer = FindObjectOfType<Timer>();
         if (gameController.gameType == GameType.SpeedRun)
             StartCoroutine(timer.StartCountdown());
     }
@@ -54,9 +53,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (gameController.gameType == GameType.SpeedRun && !timer.IsTiming())
+        if (resetting)
             return;
 
+        if (gameController.gameType == GameType.SpeedRun && !timer.IsTiming())
+            return;
 
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
