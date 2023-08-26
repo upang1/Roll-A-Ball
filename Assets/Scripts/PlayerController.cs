@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
         Time.timeScale = 1;
         rb = GetComponent<Rigidbody>();
         //Get the number of pickups in our scene
-        pickupCount = GameObject.FindGameObjectsWithTag("Pick Up").Length + GameObject.FindGameObjectsWithTag("Bowling Pin").Length;
+        pickupCount = GameObject.FindGameObjectsWithTag("Pick Up").Length;
 
         //Run the check pickups function
         SetCountText();
@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
 
     public void PinFall()
     {
-        pickupCount += 1;
+        pickupCount += 0;
         SetCountText();
     }
 }
